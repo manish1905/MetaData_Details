@@ -1,0 +1,5 @@
+package com.capgemini.validator;
+
+public class DataBaseValidator {
+
+}

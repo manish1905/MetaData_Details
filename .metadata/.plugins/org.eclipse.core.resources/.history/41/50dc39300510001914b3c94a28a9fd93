@@ -1,0 +1,147 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+   
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script  type="text/javascript">
+	function inputField()
+	{
+		 var selectItem=document.getElementById("dbName").value;
+		if(selectItem=='OracleDB')
+		{
+			document.getElementById("url").value='jdbc:oracle:thin:@';
+		}
+		 if(selectItem=='SQL')
+			{
+			document.getElementById("url").value='jdbc:mysql://';
+			}
+		if(selectItem=='DB2')
+			{
+			document.getElementById("url").value='jdbc:db2:';
+			}
+			if(selectItem=='Sybase')
+				{
+				document.getElementById("url").value='jdbc:sybase:Tds:';
+				}  
+	}
+	
+</script>
+
+<style>
+body#LoginForm{ background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg"); background-repeat:no-repeat; background-position:center; background-size:cover; padding:10px;}
+
+.form-heading { color:#fff; font-size:23px;}
+.panel h2{ color:#444444; font-size:18px; margin:0 0 8px 0;}
+.panel p { color:#777777; font-size:14px; margin-bottom:30px; line-height:24px;}
+.login-form .form-control {
+  background: #f7f7f7 none repeat scroll 0 0;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  font-size: 14px;
+  height: 50px;
+  line-height: 50px;
+}
+.main-div {
+  background: #ffffff none repeat scroll 0 0;
+  border-radius: 2px;
+  margin: 10px auto 30px;
+  max-width: 38%;
+  padding: 50px 70px 70px 71px;
+}
+
+.login-form .form-group {
+  margin-bottom:10px;
+}
+.login-form{ text-align:center;}
+.forgot a {
+  color: #777777;
+  font-size: 14px;
+  text-decoration: underline;
+}
+.login-form  .btn.btn-primary {
+  background: #f0ad4e none repeat scroll 0 0;
+  border-color: #f0ad4e;
+  color: #ffffff;
+  font-size: 14px;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  padding: 0;
+}
+.forgot {
+  text-align: left; margin-bottom:30px;
+}
+.botto-text {
+  color: #ffffff;
+  font-size: 14px;
+  margin: auto;
+}
+.login-form .btn.btn-primary.reset {
+  background: #ff9900 none repeat scroll 0 0;
+}
+.back { text-align: left; margin-top:10px;}
+.back a {color: #444444; font-size: 13px;text-decoration: none;}
+
+.error {
+	color: red;
+}
+</style>
+</head>
+
+
+<body id="LoginForm">
+<div class="container">
+<h1 class="form-heading">DataBase Login Details</h1>
+<div class="login-form">
+<div class="main-div">
+<div class="panel">
+   <h2>DataBase Login</h2>
+   <p>Please enter your details</p>
+   </div>
+	<form:form id="Login" method="POST" action="dbDetailSuccess" modelAttribute="dataBaseBean">
+	<div class="form-group">
+	 <label for="databasename" class="text-uppercase">Database Name</label>
+	<form:select class="form-control" path="dbName" onchange="javascript:inputField()" id="dbName">
+	<form:option value="None" label="---select---"/>
+	<form:option value="OracleDB" label="OracleDB"/>
+	<form:option value="SQL" label="SQL"/>
+	<form:option value="DB2" label="DB2"/>
+	<form:option value="Sybase" label="Sybase"/>
+	</form:select>
+	</div>
+	<div class="form-group">
+	<label for="databaseurl" class="text-uppercase">Database url</label>
+	<form:input class="form-control" name="url" path="url" id="url"/>
+	<form:errors path="url" cssClass="error" />
+	
+	</div>
+	<div class="form-group">
+	<label for="databaseuser" class="text-uppercase">user</label>
+	<form:input class="form-control" name="user" path="user"/>
+	<form:errors path="user" cssClass="error" />
+	</div>
+	<div class="form-group">
+	<label for="databasepassword" class="text-uppercase">password</label>
+	<form:password class="form-control" name="password" path="password"/>
+	<form:errors path="password" cssClass="error" />
+	</div>
+	
+	<input type="submit" class="btn btn-primary" value="submit"/>
+	<!-- <input type="reset" class="btn btn-primary" value="reset"/> -->
+	</form:form>
+
+
+</div>
+</div>
+</div>
+
+	
+</body>
+</html>

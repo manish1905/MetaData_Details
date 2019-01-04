@@ -1,0 +1,50 @@
+package com.capgemini.controller;
+
+
+
+import java.util.ArrayList;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.capgemini.beans.DataBaseBean;
+import com.capgemini.service.MetaDataService;
+@Controller
+public class DataBaseController{
+	MetaDataService mdataService=new MetaDataService();
+	@RequestMapping(value="/dbDetails")
+	public ModelAndView dataBaseController(@ModelAttribute("dataBaseBean") DataBaseBean dataBaseBean)
+	{
+		
+		return new ModelAndView("dbDetail");
+		
+	}
+	@RequestMapping("/dbDetailSuccess")
+	public ModelAndView dataFetch(@RequestParam() String url, String user,String password)
+	{
+		System.out.println("inside data fetch");
+		ArrayList<String> schemaDtl=new ArrayList<String>();
+		DataBaseBean dbBean=new DataBaseBean();
+		dbBean.setUrl(url);
+		dbBean.setUser(user);
+		dbBean.setPassword(password);
+		mdataService.connectionDetail(dbBean);
+		ModelAndView model=new ModelAndView();
+		schemaDtl=mdataService.schemaData();
+		System.out.println("after getting the value");
+		model.addObject("schemaList",schemaDtl);
+		return new ModelAndView("dbDetailSuccess");
+		
+	}
+	
+	
+
+	
+	
+
+}

@@ -1,0 +1,34 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Welcome</title>
+<style>
+
+
+</style>
+</head>
+
+<body>
+<div>
+	<form:form action ="index">
+	<table align="center">
+	<tr>
+	<td>UserName:</td>
+	<td><form:input path="userName"/></td>
+	</tr>
+	<tr>
+	<td>Password:</td>
+	<td><form:password path="password"/></td>
+	
+	</tr>
+	
+	</table>
+	
+	</form:form>
+	</div>
+</body>
+</html>

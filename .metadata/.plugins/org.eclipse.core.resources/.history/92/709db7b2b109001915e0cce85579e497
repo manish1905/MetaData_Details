@@ -1,0 +1,78 @@
+package com.capgemini.controller;
+
+
+
+import java.util.ArrayList;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.capgemini.beans.DataBaseBean;
+import com.capgemini.beans.MetaDataBean;
+import com.capgemini.beans.TableBean;
+import com.capgemini.service.MetaDataService;
+
+import jdk.nashorn.internal.ir.RuntimeNode.Request;
+@Controller
+public class DataBaseController{
+	MetaDataService mdataService=new MetaDataService();
+	@RequestMapping(value="/dbDetails")
+	public ModelAndView dataBaseController(@ModelAttribute("dataBaseBean") DataBaseBean dataBaseBean)
+	{
+		
+		return new ModelAndView("dbDetail");
+		
+	}
+	@RequestMapping(value="/dbDetailSuccess", method = RequestMethod.POST)
+	public ModelAndView dataFetch(@ModelAttribute("metaDataBean") MetaDataBean metaDataBean,@RequestParam() String url, String user,String password)
+	{
+		System.out.println("inside data fetch");
+		ArrayList<String> schemaDtl=new ArrayList<String>();
+		DataBaseBean dbBean=new DataBaseBean();
+		dbBean.setUrl(url);
+		dbBean.setUser(user);
+		dbBean.setPassword(password);
+		mdataService.connectionDetail(dbBean);
+		ModelAndView model=new ModelAndView();
+		schemaDtl=mdataService.schemaData();
+		model.addObject("schemaList",schemaDtl);
+		return model;
+		
+	}
+	@RequestMapping("/tableData")
+	public ModelAndView tableDetails(@ModelAttribute("schemaBean") MetaDataBean schemaBean)
+	{
+		String schemaDtl=schemaBean.getSchemaValue();
+		System.out.println("schemaDtl-->"+schemaDtl);
+		ModelAndView model=new ModelAndView();
+		ArrayList<String> tableVal=new ArrayList<String>();
+		tableVal=mdataService.tableDetail(schemaDtl);
+		System.out.println(tableVal);
+		model.addObject("tableList",tableVal);
+		return model;
+		
+	}
+	@RequestMapping("/columnData")
+	public ModelAndView columnDetails()
+	{
+		String tableDtl=tableBean.getTableValue();
+		ModelAndView model=new ModelAndView();
+		ArrayList<String> colVal=new ArrayList<String>();
+		colVal=mdataService.columnDetail(tableDtl);
+		model.addObject("columnList",colVal);
+		return model;
+		
+	}
+	
+	
+	
+
+	
+	
+
+}

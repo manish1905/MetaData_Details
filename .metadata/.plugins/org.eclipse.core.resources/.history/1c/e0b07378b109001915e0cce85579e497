@@ -1,0 +1,16 @@
+package com.capgemini.beans;
+
+public class SchemaBean {
+	
+	private String schemaValue;
+	private String tableValue;
+
+	public String getSchemaValue() {
+		return schemaValue;
+	}
+
+	public void setSchemaValue(String schemaValue) {
+		this.schemaValue = schemaValue;
+	}
+
+}

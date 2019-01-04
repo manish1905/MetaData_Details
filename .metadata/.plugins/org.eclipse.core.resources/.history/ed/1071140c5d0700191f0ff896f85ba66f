@@ -1,0 +1,7 @@
+package com.capgemini.beans;
+
+public class SchemaBean {
+	
+	private string schemaValue;
+
+}

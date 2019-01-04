@@ -1,0 +1,46 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>DataBase Data</title>
+</head>
+<body>
+	<form:form method="POST" action="dbDetailSuccess" modelAttribute="dataBaseBean">
+	<h2>Enter DataBase Detail</h2>
+	<table align="center" border="1">
+	<tr>
+	<td>DataBase Name:</td>
+	<td><form:select path="dbName" onchange="changeFieldValue(this.value)">
+	<form:option value="None" label="---select---"/>
+	<form:option value="OracleDB" label="OracleDB"/>
+	<form:option value="SQL" label="SQL"/>
+	<form:option value="MongoDB" label="MongoDB"/>
+	<form:option value="FireBird" label="FireBird"/>
+	</form:select></td>
+	</tr>
+	<tr>
+	<td>DataBase Url:</td>
+	<td><form:input name="url" path="url"/></td>
+	</tr>
+	<tr>
+	<td>DataBase User:</td>
+	<td><form:input name="user" path="user"/></td>
+	</tr>
+	<tr>
+	<td>DataBase Password:</td>
+	<td><form:password name="password" path=""/></td>
+	</tr>
+	
+	</table>
+	<table align="center">
+	<tr>
+	<td><input type="submit" value="submit"/></td>
+	<td><input type="submit" value="cancel"/></td>
+	</tr>
+	</table>
+	</form:form>
+</body>
+</html>

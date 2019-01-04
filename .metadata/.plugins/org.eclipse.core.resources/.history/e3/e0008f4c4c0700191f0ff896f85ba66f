@@ -1,0 +1,86 @@
+package com.capgemini.dao.impl;
+
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import com.capgemini.beans.DataBaseBean;
+import com.capgemini.dao.MetaDataDao;
+import com.capgemini.util.OracleJDBCConnection;
+
+public class MetaDataDaoImpl implements MetaDataDao{
+	static Connection connection=null;
+	static DatabaseMetaData metaData =null;
+	
+public void Connection(DataBaseBean dataBaseBean)
+{
+	System.out.println("inside connection of dataBase");
+	
+try {
+	connection= OracleJDBCConnection.getConnection(dataBaseBean.getUrl(),dataBaseBean.getUser(),dataBaseBean.getPassword());
+}catch(SQLException e)
+{
+	e.printStackTrace();
+}
+try {
+	metaData=connection.getMetaData();
+}catch(SQLException e1)
+{
+	e1.printStackTrace();
+}
+
+}
+	@Override
+	public ArrayList<String> getSchemaDetails() throws SQLException {
+		System.out.println("inside schemaDetail function");
+		// TODO Auto-generated method stub
+		metaData=connection.getMetaData();
+		System.out.println("Getting schemas");
+		ResultSet resultSet=metaData.getSchemas();
+		ArrayList<String> tableSchema=new ArrayList<String>();
+		while(resultSet.next())
+			{
+			String tblSchm=resultSet.getString("TABLE_SCHEM");
+			tableSchema.add(tblSchm);
+			System.out.println(tableSchema);
+			}
+		return tableSchema;
+	}
+	@Override
+	public ArrayList<String> getTableNameDetails(ArrayList<String> tableSchema) throws SQLException {
+		// TODO Auto-generated method stub
+		String[] table= {"TABLE"};
+		ResultSet rs=null;
+		System.out.println("Getting tables");
+		ArrayList<String> mainTable=new ArrayList<String>();
+		for(String tableDetail:tableSchema)
+		{
+		rs=metaData.getTables(null, tableDetail, null, table);
+		while(rs.next())
+		{
+			mainTable.add(rs.getString(3));
+		}
+		}
+		return mainTable;
+	}
+	@Override
+	public ArrayList<String> getCoulmnDetails(ArrayList<String> mainTable) throws SQLException {
+		// TODO Auto-generated method stub
+		ResultSet resSet=null;
+		ArrayList<String> columnData=new ArrayList<String>();
+		System.out.println("Getting columns");
+		for(String table:mainTable)
+		{
+			//columnData.add("Table->"+table);
+			resSet=metaData.getColumns(null,null, table, null);
+			while(resSet.next())
+			{
+				columnData.add(resSet.getString(2));
+				
+			}
+		}
+		return columnData;
+	}
+}

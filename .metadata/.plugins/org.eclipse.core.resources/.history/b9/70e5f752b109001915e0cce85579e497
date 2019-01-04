@@ -1,0 +1,15 @@
+package com.capgemini.beans;
+
+public class TableBean {
+	
+	private String tableValue;
+
+	public String getTableValue() {
+		return tableValue;
+	}
+
+	public void setTableValue(String tableValue) {
+		this.tableValue = tableValue;
+	}
+
+}

@@ -1,0 +1,35 @@
+package com.capgemini.util;
+
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class OracleJDBCConnection {
+	
+	public Connection getConnection(String url,String username,String password) throws SQLException
+	{
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+
+		}catch(ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		
+		Connection connection=null;
+		DatabaseMetaData metaData=null;
+		try
+		{
+			connection=DriverManager.getConnection("jdbc:oracle:thin:@135.203.55.96:1521:plsystst","plutil","may=05");
+			
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return connection;
+		
+}
+	
+}

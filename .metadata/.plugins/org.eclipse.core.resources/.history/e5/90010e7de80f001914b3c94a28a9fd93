@@ -1,0 +1,79 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+   
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script  type="text/javascript">
+	function inputField()
+	{
+		 var selectItem=document.getElementById("dbName").value;
+		if(selectItem=='OracleDB')
+		{
+			document.getElementById("url").value='jdbc:oracle:thin:@';
+		}
+		 if(selectItem=='SQL')
+			{
+			document.getElementById("url").value='jdbc:mysql://';
+			}
+		if(selectItem=='DB2')
+			{
+			document.getElementById("url").value='jdbc:db2:';
+			}
+			if(selectItem=='Sybase')
+				{
+				document.getElementById("url").value='jdbc:sybase:Tds:';
+				}  
+	}
+	
+</script>
+</head>
+
+
+<body id="dbForm">
+<div class="container">
+<h1 class="form-heading">DataBase Login Details</h1>
+<div class="login-form">
+<div class="main-div">
+<div class="panel">
+   <h2>DataBase Login</h2>
+   <p>Please enter your details</p>
+   </div>
+	<form:form id="dblogin" method="POST" action="dbDetailSuccess" modelAttribute="dataBaseBean">
+	<div class="form-group">
+	<form:select path="dbName" onchange="javascript:inputField()" id="dbName">
+	<form:option value="None" label="---select---"/>
+	<form:option value="OracleDB" label="OracleDB"/>
+	<form:option value="SQL" label="SQL"/>
+	<form:option value="DB2" label="DB2"/>
+	<form:option value="Sybase" label="Sybase"/>
+	</form:select>
+	</div>
+	<div class="form-group">
+	<form:input class="form-control" name="url" path="url" id="url"/>
+	</div>
+	<div class="form-group">
+	<form:input class="form-control" name="user" path="user"/>
+	</div>
+	<div class="form-group">
+	<form:password class="form-control" name="password" path="password"/>
+	</div>
+	
+	<input type="submit" class="btn btn-primary" value="submit"/>
+	<input type="reset" class="btn btn-primary" value="reset"/>
+	</form:form>
+
+
+</div>
+</div>
+</div>
+
+	
+</body>
+</html>

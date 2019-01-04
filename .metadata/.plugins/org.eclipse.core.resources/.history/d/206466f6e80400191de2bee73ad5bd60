@@ -1,0 +1,33 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>DataBase Data</title>
+</head>
+<body>
+	<form action="dbDetails">
+	<h2>Enter DataBase Detail</h2>
+	<table align="center" border="1">
+	<tr>
+	<td>DataBase Url:</td>
+	<td><form:input path="url"/></td>
+	</tr>
+	<tr>
+	<td>DataBase User:</td>
+	<td><form:input path="user"/></td>
+	</tr>
+	<tr>
+	<td>DataBase Password:</td>
+	<td><form:password path="password"/></td>
+	</tr>
+	
+		
+	
+	
+	</table>
+	
+	</form>
+</body>
+</html>

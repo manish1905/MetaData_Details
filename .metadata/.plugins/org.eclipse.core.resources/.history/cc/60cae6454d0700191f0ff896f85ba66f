@@ -1,0 +1,52 @@
+package com.capgemini.service;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import com.capgemini.beans.DataBaseBean;
+import com.capgemini.dao.impl.MetaDataDaoImpl;
+
+public class MetaDataService {
+	MetaDataDaoImpl daoImpl=new MetaDataDaoImpl();
+	
+	public void connectionDetail(DataBaseBean dbBean)
+	{
+		System.out.println("inside connection detail");
+		daoImpl.Connection(dbBean);
+	}
+	
+	public ArrayList<String> schemaData()
+	{
+		System.out.println("inside schema");
+		ArrayList<String> schema=new ArrayList<String>();
+		try {
+			schema=daoImpl.getSchemaDetails();
+			System.out.println("details--->"+schema);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return schema;
+	}
+	
+/*	public ArrayList<String> getAllMetaData()
+	{
+	
+		
+		ArrayList<String> tableData=new ArrayList<String>();
+		
+		try {
+			System.out.println("Inside service");
+			tableData=daoImpl.getCoulmnDetails(daoImpl.getTableNameDetails(daoImpl.getSchemaDetails()));
+				System.out.println(tableData.size()+" Rows fetched");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return tableData;
+	}*/
+			
+				
+	
+
+}
